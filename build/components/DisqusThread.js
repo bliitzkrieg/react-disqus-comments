@@ -133,12 +133,15 @@ var DisqusThread = function (_React$Component) {
                         this.page.url = this.page.url.replace(/#/, '') + '#!newthread';
                     }
                 });
+                if (typeof this.props.onLoad === 'function') {
+                    this.props.onLoad();
+                }
             } else {
                 // Otherwise add Disqus to the page
                 copyProps(window, props, 'disqus_');
                 this.addDisqusScript();
-                if (typeof props.onLoad === 'function') {
-                    props.onLoad();
+                if (typeof this.props.onLoad === 'function') {
+                    this.props.onLoad();
                 }
             }
         }
