@@ -102,9 +102,6 @@ var DisqusThread = function (_React$Component) {
 
             parent.appendChild(child);
             __disqusAdded = true;
-            if (typeof this.props.onLoad === 'function') {
-                this.props.onLoad();
-            }
         }
     }, {
         key: 'loadDisqus',
@@ -140,6 +137,9 @@ var DisqusThread = function (_React$Component) {
                 // Otherwise add Disqus to the page
                 copyProps(window, props, 'disqus_');
                 this.addDisqusScript();
+                if (typeof props.onLoad === 'function') {
+                    props.onLoad();
+                }
             }
         }
     }]);
