@@ -102,6 +102,9 @@ var DisqusThread = function (_React$Component) {
 
             parent.appendChild(child);
             __disqusAdded = true;
+            if (typeof props.onLoad === 'function') {
+                props.onLoad();
+            }
         }
     }, {
         key: 'loadDisqus',
@@ -196,7 +199,12 @@ DisqusThread.propTypes = {
      * JavaScript object with comment `id` and `text`. This allows you to track
      * user comments and replies and run a script after a comment is posted.
      */
-    onNewComment: _propTypes2.default.func
+    onNewComment: _propTypes2.default.func,
+
+    /**
+     * `onLoad` function fired when the disqus widget has been loaded into DOM
+     */
+    onLoad: _propTypes2.default.func
 };
 
 exports.default = DisqusThread;
