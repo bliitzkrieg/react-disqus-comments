@@ -102,8 +102,8 @@ var DisqusThread = function (_React$Component) {
 
             parent.appendChild(child);
             __disqusAdded = true;
-            if (typeof props.onLoad === 'function') {
-                props.onLoad();
+            if (typeof this.props.onLoad === 'function') {
+                this.props.onLoad();
             }
         }
     }, {
