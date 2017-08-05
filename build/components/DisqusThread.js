@@ -32,17 +32,20 @@ var __disqusAdded = false;
 function copyProps(context, props) {
     var prefix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
-    Object.keys(props).forEach(function (prop) {
-        context[prefix + prop] = props[prop];
-    });
 
-    if (typeof props.onNewComment === 'function') {
-        context[prefix + 'config'] = function config() {
+    context[prefix + 'config'] = function config() {
+        var _this = this;
+
+        if (typeof props.onNewComment === 'function') {
             this.callbacks.onNewComment = [function handleNewComment(comment) {
                 props.onNewComment(comment);
             }];
-        };
-    }
+        }
+
+        Object.keys(props).forEach(function (prop) {
+            _this[prop] = props[prop];
+        });
+    };
 }
 
 var DisqusThread = function (_React$Component) {
@@ -72,12 +75,12 @@ var DisqusThread = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
+            var _this3 = this;
 
             var props = Object.keys(this.props).reduce(function (memo, key) {
                 return DISQUS_CONFIG.some(function (config) {
                     return config === key;
-                }) ? memo : _extends({}, memo, _defineProperty({}, key, _this2.props[key]));
+                }) ? memo : _extends({}, memo, _defineProperty({}, key, _this3.props[key]));
             }, {});
 
             return _react2.default.createElement(
@@ -106,14 +109,14 @@ var DisqusThread = function (_React$Component) {
     }, {
         key: 'loadDisqus',
         value: function loadDisqus() {
-            var _this3 = this;
+            var _this4 = this;
 
             var props = {};
 
             // Extract Disqus props that were supplied to this component
             DISQUS_CONFIG.forEach(function (prop) {
-                if (!!_this3.props[prop]) {
-                    props[prop] = _this3.props[prop];
+                if (!!_this4.props[prop]) {
+                    props[prop] = _this4.props[prop];
                 }
             });
 
