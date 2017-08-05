@@ -43,7 +43,7 @@ function copyProps(context, props) {
         }
 
         Object.keys(props).forEach(function (prop) {
-            _this[prop] = props[prop];
+            _this.page[prop] = props[prop];
         });
     };
 }
